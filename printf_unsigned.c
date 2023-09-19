@@ -8,7 +8,7 @@
  *
  * Return: The updated count of printed characters.
  */
-int printf_unsigned(unsigned int num, int printed)
+int printf_unsigned_int(unsigned int num, int printed)
 {
 	int digits = 0;
 	unsigned int temp = num;
