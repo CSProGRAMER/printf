@@ -22,7 +22,8 @@ int printf_hex(unsigned int n, int uppercase)
 
 	while (temp > 0)
 	{
-		hex_digit = (temp % 16 < 10) ? (temp % 16 + '0') : (temp % 16 - 10 + (uppercase ? 'A' : 'a'));
+		hex_digit = (temp % 16 < 10) ? (temp % 16 + '0') :
+			(temp % 16 - 10 + (uppercase ? 'A' : 'a'));
 		hex_buffer[i] = hex_digit;
 		temp /= 16;
 		i++;

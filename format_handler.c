@@ -14,54 +14,30 @@ int format_handler(char specifier, va_list *args)
 	switch (specifier)
 	{
 		case 'c':
-		{
-			char c = va_arg(*args, int);
-			printed += write(1, &c, 1);
-			break;
-		}
+			return (printf_char(va_arg(*args, int)));
 		case 's':
-		{
-			char *str = va_arg(*args, char *);
-			if (!str)
-				str = "(nil)";
-			while (*str)
-			{
-				printed += write(1, str, 1);
-				str++;
-			}
-			break;
-		}
+			return (printf_string(va_arg(*args, char *)));
 		case 'd':
 		case 'i':
-			printed += printf_integer(va_arg(*args, int));
-			break;
+			return (printf_integer(va_arg(*args, int)));
 		case 'u':
-			printed += printf_unsigned_int(va_arg(*args, unsigned int));
-			break;
+			return (printf_unsigned_int(va_arg(*args, unsigned int)));
 		case 'o':
-			printed += printf_octal(va_arg(*args, unsigned int));
-			break;
+			return (printf_octal(va_arg(*args, unsigned int)));
 		case 'b':
-			printed += printf_binary(va_arg(*args, unsigned int));
-			break;
+			return (printf_binary(va_arg(*args, unsigned int)));
 		case 'x':
-			printed += printf_hex(va_arg(*args, unsigned int), 0);
-			break;
+			return (printf_hex(va_arg(*args, unsigned int), 0));
 		case 'X':
-			printed += printf_hex(va_arg(*args, unsigned int), 1);
-			break;
+			return (printf_hex(va_arg(*args, unsigned int), 1));
 		case 'p':
-			printed += printf_address(va_arg(*args, void *));
-			break;
+			return (printf_address(va_arg(*args, void *)));
 		case '%':
-			printed += write(1, "%", 1);
-			break;
+			return (write(1, "%", 1));
 		default:
 			if (specifier == 'r')
-				printed += write(1, "%r", 2);
+				return (write(1, "%r", 2));
 			else
 				return (-1);
 	}
-
-	return (printed);
 }

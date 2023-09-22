@@ -25,6 +25,7 @@ int printf_address(void *ptr)
 		for (i = 60; i >= 0; i -= 4)
 		{
 			unsigned int nibble = (address >> i) & 0xF;
+
 			if (leading_zero && nibble == 0)
 				continue;
 			address_buffer[j++] = (nibble < 10) ? (nibble + '0') : (nibble - 10 + 'a');
