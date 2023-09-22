@@ -9,8 +9,6 @@
  */
 int format_handler(char specifier, va_list *args)
 {
-	int printed = 0;
-
 	switch (specifier)
 	{
 		case 'c':
