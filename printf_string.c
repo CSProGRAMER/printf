@@ -1,17 +1,22 @@
 #include "main.h"
 
 /**
- * printf_string - Print a string to stdout
- * @str: The string to print
+ * printf_string - Print a string.
+ * @str: The string to print.
  *
  * Return: The number of characters printed.
  */
-int printf_string(char *str)
+int printf_string(const char *str)
 {
 	int printed = 0;
 
-	while (str && str[printed])
-		printed += write(1, &str[printed], 1);
+	if (!str)
+		str = "(nil)";
 
-	return (printed);
+	while (*str)
+	{
+		printed += write(1, str, 1);
+		str++;
+	}
+	return printed;
 }

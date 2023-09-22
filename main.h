@@ -24,7 +24,7 @@ int _puts(char *str);
 
 /*new updates*/
 int _putchar(char character);
-int printf_char(va_list args, int printed);
+int printf_char(char c);
 int _printf(const char *format, ...);
 int printf_integer(int n);
 int printf_unsigned_int(unsigned int n);
@@ -33,7 +33,7 @@ int printf_binary(unsigned int n);
 int printf_hex(unsigned int n, int is_upper);
 int printf_address(void *p);
 char *printf_base(unsigned int n, int base);
-int printf_string(char *str);
+int printf_string(const char *str);
 int printf_to_upper(int len, char *str);
 int format_handler(char specifier, va_list *args);
 int format_string(va_list *args);
