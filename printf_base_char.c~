@@ -1,0 +1,36 @@
+/**
+ * printf_base - Convert an unsigned integer to a base and return the result as a string
+ * @n: The unsigned integer to convert
+ * @base: The base to convert to (8 for octal, 16 for hexadecimal)
+ *
+ * Return: A dynamically allocated string with the converted value.
+ */
+char *printf_base(unsigned int n, char base)
+{
+    char digits[] = "0123456789ABCDEF";
+    char *str;
+    int len = 0;
+    unsigned int temp = n;
+
+    while (temp > 0)
+    {
+        temp /= base;
+        len++;
+    }
+
+    str = malloc(len + 1);
+    if (!str)
+        return (NULL);
+
+    str[len] = '\0';
+    temp = n;
+
+    while (len > 0)
+    {
+        len--;
+        str[len] = digits[temp % base];
+        temp /= base;
+    }
+
+    return (str);
+}

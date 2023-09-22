@@ -1,0 +1,68 @@
+/**
+ * _printf - Print formatted data to stdout
+ * @format: The format string
+ *
+ * Return: The number of characters printed.
+ */
+int _printf(const char *format, ...)
+{
+	va_list args;
+	int i, printed = 0;
+
+	va_start(args, format);
+	for (i = 0; format && format[i]; i++)
+	{
+		if (format[i] != '%')
+		{
+			printed += write(1, &format[i], 1);
+			continue;
+		}
+		i++;
+		while (format[i] == ' ')
+			i++;
+
+		if (format[i] == '\0')
+			return (-1);
+
+		if (format[i] == '%')
+		{
+			printed += write(1, &format[i], 1);
+			continue;
+		}
+		switch (format[i])
+		{
+			case 'c':
+				printed += write(1, &va_arg(args, int), 1);
+				break;
+			case 's':
+				printed += write(1, va_arg(args, char *), 0);
+				break;
+			case 'd':
+			case 'i':
+				printed += printf_integer(va_arg(args, int));
+				break;
+			case 'u':
+				printed += printf_unsigned(va_arg(args, unsigned int));
+				break;
+			case 'o':
+				printed += printf_octal(va_arg(args, unsigned int));
+				break;
+			case 'b':
+				printed += printf_binary(va_arg(args, unsigned int));
+				break;
+			case 'x':
+				printed += printf_hex(va_arg(args, unsigned int), 0);
+				break;
+			case 'X':
+				printed += printf_hex(va_arg(args, unsigned int), 1);
+				break;
+			case 'p':
+				printed += printf_address(va_arg(args, void *));
+				break;
+			default:
+				return (-1);
+		}
+	}
+	va_end(args);
+	return (printed);
+}

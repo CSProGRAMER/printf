@@ -1,23 +1,17 @@
 #include "main.h"
 
-
 /**
- * printf_string - Prints a string.
- * @args: The arguments to use.
- * @printed: The number of printed characters so far.
+ * printf_string - Print a string to stdout
+ * @str: The string to print
  *
- * Return: The updated count of printed characters.
+ * Return: The number of characters printed.
  */
-int printf_string(va_list args, int printed)
+int printf_string(char *str)
 {
-	char *string = va_arg(args, char *);
+	int printed = 0;
 
-	while (*string != '\0')
-	{
-		_putchar(*string);
-		printed++;
-		string++;
-	}
+	while (str && str[printed])
+		printed += write(1, &str[printed], 1);
 
 	return (printed);
 }

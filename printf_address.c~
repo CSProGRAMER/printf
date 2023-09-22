@@ -1,0 +1,13 @@
+#include "main.h"
+
+
+/**
+ * printf_address - Print an address in hexadecimal format
+ * @p: The address to print
+ *
+ * Return: The number of characters printed.
+ */
+int printf_address(void *p)
+{
+	return (write(1, "0x", 2) + printf_hex((unsigned long)p, 0));
+}
