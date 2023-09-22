@@ -1,16 +1,10 @@
 #include "main.h"
-
 /**
- * printf_char - Prints a character.
- * @args: The arguments to use.
- * @printed: The number of printed characters.
- *
- * Return: The updated count of printed characters.
+ * printf_char - Print a character.
+ * @c: The character to print.
+ * Return: The number of characters printed.
  */
-int printf_char(va_list args, int printed)
+int printf_char(char c)
 {
-	int character = va_arg(args, int);
-
-	_putchar(character);
-	return (printed + 1);
+	return write(1, &c, 1);
 }
