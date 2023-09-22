@@ -3,37 +3,17 @@
 
 /**
  * printf_octal - Prints the octal representation of an unsigned integer.
- * @num: The number to be printed in octal.
- * @printed: The number of printed characters so far.
+ * @n: The number to be printed in octal.
  *
  * Return: The updated count of printed characters.
  */
-int printf_octal(unsigned int num, int printed)
+int printf_octal(unsigned int n)
 {
-	int oct[100], i = 0, j;
+	int count = 0;
 
-	while (num != 0)
-	{
-		int remainder = num % 8;
+	if (n / 8)
+		count += printf_octal(n / 8);
 
-		oct[i] = 48 + remainder;
-		i++;
-		num /= 8;
-	}
-
-	if (i == 0)
-	{
-		_putchar('0');
-		printed++;
-	}
-	else
-	{
-		for (j = i - 1; j >= 0; j--)
-		{
-			_putchar(oct[j]);
-			printed++;
-		}
-	}
-
-	return (printed);
+	count += write(1, &"01234567"[n % 8], 1);
+	return (count);
 }

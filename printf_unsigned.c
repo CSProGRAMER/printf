@@ -1,45 +1,18 @@
 #include "main.h"
 
-
 /**
- * printf_unsigned - Prints an unsigned integer.
- * @num: The unsigned integer to be printed.
- * @printed: The number of printed characters so far.
+ * printf_unsigned_int - Print an unsigned integer
+ * @n: The unsigned integer to print
  *
- * Return: The updated count of printed characters.
+ * Return: The number of characters printed.
  */
-int printf_unsigned_int(unsigned int num, int printed)
+int printf_unsigned_int(unsigned int n)
 {
-	int digits = 0;
-	unsigned int temp = num;
+	int printed = 0;
 
-	do {
-		digits++;
-		temp /= 10;
-	} while (temp != 0);
+	if (n / 10)
+		printed += printf_unsigned_int(n / 10);
 
-	if (num == 0)
-	{
-		_putchar('0');
-		printed++;
-	}
-	else
-	{
-		char unsigned_str[11];
-		int i = 0;
-
-		while (num != 0)
-		{
-			unsigned_str[i] = (num % 10) + '0';
-			num /= 10;
-			i++;
-		}
-		for (i = digits - 1; i >= 0; i--)
-		{
-			_putchar(unsigned_str[i]);
-			printed++;
-		}
-	}
-
+	printed += write(1, &"0123456789"[n % 10], 1);
 	return (printed);
 }

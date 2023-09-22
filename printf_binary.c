@@ -1,37 +1,29 @@
 #include "main.h"
 
 /**
- * printf_binary - Prints a binary representation of an unsigned integer.
- * @num: The number to be printed in binary.
- * @printed: The number of characters printed so far.
+ * printf_binary - Print an unsigned integer in binary format
+ * @n: The unsigned integer to print
  *
- * Return: The updated count of printed characters.
+ * Return: The number of characters printed.
  */
-int printf_binary(unsigned int num, int printed)
+int printf_binary(unsigned int n)
 {
-	int binary[32] = {0};
-	int i = 0;
+	int printed = 0;
+	unsigned int mask = 1 << 31;
+	int started = 0;
 
-	if (num == 0)
+	while (mask)
 	{
-		_putchar('0');
-		printed++;
-		return (printed);
+		if (n & mask)
+		{
+			printed += write(1, "1", 1);
+			started = 1;
+		}
+		else if (started)
+			printed += write(1, "0", 1);
+		mask >>= 1;
 	}
-
-	while (num > 0)
-	{
-		binary[i] = num % 2;
-		num /= 2;
-		i++;
-	}
-
-	while (i > 0)
-	{
-		i--;
-		_putchar('0' + binary[i]);
-		printed++;
-	}
-
+	if (!started)
+		printed += write(1, "0", 1);
 	return (printed);
 }

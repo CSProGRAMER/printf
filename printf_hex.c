@@ -1,53 +1,36 @@
 #include "main.h"
-
 /**
- * _x - Prints the hexadecimal representation of an unsigned integer.
- * @num: The number to be printed in hexadecimal.
- * @printed: The number of printed characters so far.
- * @uppercase: Flag to indicate 1 for uppercase, 0 for lowercase.
+ * printf_hex - Print an unsigned integer in hexadecimal format
+ * @n: The unsigned integer to print
+ * @uppercase: 1 for uppercase, 0 for lowercase
  *
- * Return: The updated count of printed characters.
+ * Return: The number of characters printed.
  */
-int _x(unsigned int num, int printed, int uppercase)
+int printf_hex(unsigned int n, int uppercase)
 {
-	int hex[100], i = 0, j;
+	int printed = 0;
+	unsigned int temp = n;
+	char hex_digit;
+	int i = 0;
+	char hex_buffer[9];
 
-	while (num != 0)
+	if (n == 0)
 	{
-		int remainder = num % 16;
+		printed += write(1, "0", 1);
+		return (printed);
+	}
 
-		if (remainder < 10)
-		{
-			hex[i] = 48 + remainder;
-		}
-		else
-		{
-			if (uppercase)
-			{
-				hex[i] = 65 + (remainder - 10);
-			}
-			else
-			{
-				hex[i] = 97 + (remainder - 10);
-			}
-		}
+	while (temp > 0)
+	{
+		hex_digit = (temp % 16 < 10) ? (temp % 16 + '0') : (temp % 16 - 10 + (uppercase ? 'A' : 'a'));
+		hex_buffer[i] = hex_digit;
+		temp /= 16;
 		i++;
-		num /= 16;
 	}
-
-	if (i == 0)
+	while (i > 0)
 	{
-		_putchar('0');
-		printed++;
+		i--;
+		printed += write(1, &hex_buffer[i], 1);
 	}
-	else
-	{
-		for (j = i - 1; j >= 0; j--)
-		{
-			_putchar(hex[j]);
-			printed++;
-		}
-	}
-
 	return (printed);
 }

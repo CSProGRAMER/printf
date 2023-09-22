@@ -1,46 +1,27 @@
 #include "main.h"
 
-
 /**
- * printf_integer - Prints an integer number.
- * @args: The number argument.
- * @printed: The number of printed characters so far.
+ * printf_integer - Print an integer
+ * @n: The integer to print
  *
- * Return: The updated count of printed characters.
+ * Return: The number of characters printed.
  */
-int printf_integer(va_list args, int printed)
+int printf_integer(int n)
 {
-	int num = va_arg(args, int);
-	int digits = 0;
-	int temp = num;
-	int digit;
+	int printed = 0;
+	unsigned int num;
 
-	if (num < 0)
+	if (n < 0)
 	{
-		printed += _putchar('-');
-		num = -num;
-		temp = num;
+		printed += write(1, "-", 1);
+		num = -n;
 	}
+	else
+		num = n;
 
-	do {
-		digits++;
-		temp /= 10;
-	} while (temp != 0);
+	if (num / 10)
+		printed += printf_integer(num / 10);
 
-	while (digits > 0)
-	{
-		int pow10 = 1;
-		int i;
-
-		for (i = 1; i < digits; i++)
-		{
-			pow10 *= 10;
-		}
-		digit = num / pow10;
-		printed += _putchar(digit + '0');
-		num -= digit * pow10;
-		digits--;
-	}
-
+	printed += write(1, &"0123456789"[num % 10], 1);
 	return (printed);
 }
