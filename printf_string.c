@@ -18,5 +18,5 @@ int printf_string(const char *str)
 		printed += write(1, str, 1);
 		str++;
 	}
-	return printed;
+	return (printed);
 }
